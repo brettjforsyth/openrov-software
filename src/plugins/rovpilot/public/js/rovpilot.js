@@ -106,7 +106,7 @@
           }
         },
 
-        // camera down/centre/up
+        // camera up/centre/down
         {
           name: "rovPilot.adjustCameraTilt_down",
           description: "Point the camera further down.",
@@ -161,7 +161,8 @@
           description: "Set throttle via axis input.",
           defaults: { gamepad: 'LEFT_STICK_Y' },
           axis: function (v) {
-            rov.cockpit.emit('rovpilot.setThrottle', -1 * v);
+            var sine = 500 * (1 - Math.cos((v*500) / 500 * (Math.PI / 2))) + 0;
+            rov.cockpit.emit('rovpilot.setThrottle', -1 * (sine/500));
           }
         },
 
@@ -184,7 +185,8 @@
           description: "Turn the ROV via axis input.",
           defaults: { gamepad: 'LEFT_STICK_X' },
           axis: function (v) {
-            rov.cockpit.emit('rovpilot.setYaw', v);
+            var sine = 500 * (1 - Math.cos((v*500) / 500 * (Math.PI / 2))) + 0;
+            rov.cockpit.emit('rovpilot.setYaw', (sine/500));
           }
         },
 
@@ -220,7 +222,8 @@
           description: "Bring the ROV shallower or deeper via axis input.",
           defaults: { gamepad: 'RIGHT_STICK_Y' },
           axis: function (v) {
-            rov.cockpit.emit('rovpilot.setLift', -1 * v);
+             var sine = 500 * (1 - Math.cos((v*500) / 500 * (Math.PI / 2))) + 0;
+            rov.cockpit.emit('rovpilot.setLift', -1 * (sine/500));
           }
         },
         // Lift up
